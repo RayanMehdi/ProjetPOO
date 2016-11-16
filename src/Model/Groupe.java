@@ -10,5 +10,14 @@ package Model;
  * @author Jo'
  */
 public class Groupe {
+    private Case[] tab;
+
+    public Groupe() {
+        tab[0] = new Case();
+        Valeurs val = new Valeurs(0);
+        for(int i=0; i<9; i++)
+            tab[i] = new Case(val));
+    }
+    
     
 }
