@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class caseBloquee extends Case {
     
-    public caseBloquee(Valeurs val, ArrayList<Groupe> tabGroupe) {
-        super(val, tabGroupe);
+    public caseBloquee(Valeurs val) {
+        super(val);
     }
  
     

@@ -5,20 +5,49 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jo'
  */
 public class Jeu {
-    private Groupe tabL;
-    private Groupe tabC;
-    private Groupe tabCa;
+    private ArrayList<Groupe> tabL;
+    private ArrayList<Groupe> tabC;
+    private ArrayList<ArrayList<Groupe>> tabCa;
 
-    public Jeu() {
-        this.tabL = new Groupe();
-        this.tabC = new Groupe();
-        this.tabCa = new Groupe();
+    public Jeu(String data) {
+        init(data);
+        
     }
     
+    public void init(String data){
+        
+        
+        for(int i=0; i<9; i++){
+            tabL.set(i, new Groupe());
+            tabC.set(i, new Groupe());
+        }
+        
+        String[]tabData = data.split(" ");
+        
+        int numL,numC;
+        
+	for(int i = 0; i<tabData.length; i++){
+            
+            // VOIR POUR LA CLASSE CASE
+            caseBloquee c = new caseBloquee(tabData[i]);
+            numL = i/9;
+            numC = i%9;
+            tabL.get(numL).add(c);
+            tabC.get(numC).add(c);
+            tabCa.get(numL/3).get(numC/3).add(c);
+        }
+    }
+    
+    public void affiche(){
+        
+        System.out.println("");
+    }
     
 }

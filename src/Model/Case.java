@@ -17,9 +17,8 @@ public abstract class Case {
     ArrayList<Groupe> tabGroupe;
     
 
-    public Case(Valeurs val, ArrayList<Groupe> tabGroupe) {
+    public Case(Valeurs val) {
         this.val = val;
-        this.tabGroupe = tabGroupe;
     }
 
     public Valeurs getVal() {
@@ -29,6 +28,11 @@ public abstract class Case {
     public ArrayList<Groupe> getTabGroupe() {
         return tabGroupe;
     }
+
+    public void setTabGroupe(ArrayList<Groupe> tabGroupe) {
+        this.tabGroupe = tabGroupe;
+    }
+    
 
     
 

@@ -5,6 +5,7 @@
  */
 package projetpoo;
 
+import Model.Jeu;
 import Model.Valeurs;
 import Model.caseBloquee;
 
@@ -19,8 +20,9 @@ public class ProjetPOO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        caseBloquee c=new caseBloquee(Valeurs.ONE, null);
-        System.out.println(c.getVal());
+        
+        Jeu j1=new Jeu();
+        
     }
     
 }

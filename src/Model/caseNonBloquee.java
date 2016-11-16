@@ -25,8 +25,8 @@ public class caseNonBloquee extends Case{
     
     
     
-    public caseNonBloquee(Valeurs val, ArrayList<Groupe> tabGroupe) {
-        super(val, tabGroupe);
+    public caseNonBloquee(Valeurs val) {
+        super(val);
     }
 
     public void setTabGroupe(ArrayList<Groupe> tabGroupe) {
