@@ -10,5 +10,15 @@ package Model;
  * @author Jo'
  */
 public class Jeu {
+    private Groupe tabL;
+    private Groupe tabC;
+    private Groupe tabCa;
+
+    public Jeu() {
+        this.tabL = new Groupe();
+        this.tabC = new Groupe();
+        this.tabCa = new Groupe();
+    }
+    
     
 }
