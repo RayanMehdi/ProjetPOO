@@ -5,6 +5,9 @@
  */
 package projetpoo;
 
+import Model.Valeurs;
+import Model.caseBloquee;
+
 /**
  *
  * @author rayanmehdi1
@@ -16,6 +19,8 @@ public class ProjetPOO {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        caseBloquee c=new caseBloquee(Valeurs.ONE, null);
+        System.out.println(c.getVal());
     }
     
 }

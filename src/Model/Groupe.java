@@ -16,10 +16,15 @@ public class Groupe {
 
     public Groupe() {
         tab = new ArrayList<Case>();
-        Valeurs val = new Valeurs(0);
-        for(int i=0; i<9; i++)
-            tab[i] = new Case(val));
     }
     
-    
+    public boolean estEnConflit(Case c){
+		boolean ret = false;
+		for(Case c2 : tab){
+			if(c.getVal()!=c2.getVal())
+				ret = true;
+			
+		}
+		return ret;
+	}
 }

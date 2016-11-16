@@ -41,7 +41,7 @@ public class caseNonBloquee extends Case{
         this.val = val;
         conflit = false;
         for (Groupe g : tabGroupe ) {
-            if (g.estENConflit(this)) {
+            if (g.estEnConflit(this)) {
                 conflit = true;
             }
         }
