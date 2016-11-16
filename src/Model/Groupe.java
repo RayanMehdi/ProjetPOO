@@ -5,10 +5,21 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Jo'
  */
 public class Groupe {
+    private ArrayList<Case> tab;
+
+    public Groupe() {
+        tab = new ArrayList<Case>();
+        Valeurs val = new Valeurs(0);
+        for(int i=0; i<9; i++)
+            tab[i] = new Case(val));
+    }
+    
     
 }
