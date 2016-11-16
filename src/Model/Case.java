@@ -5,10 +5,31 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author rayanmehdi1
  */
-public class Case {
+public abstract class Case {
+
+    protected Valeurs val;
+    ArrayList<Groupe> tabGroupe;
     
+
+    public Case(Valeurs val, ArrayList<Groupe> tabGroupe) {
+        this.val = val;
+        this.tabGroupe = tabGroupe;
+    }
+
+    public Valeurs getVal() {
+        return val;
+    }
+
+    public ArrayList<Groupe> getTabGroupe() {
+        return tabGroupe;
+    }
+
+    
+
 }
