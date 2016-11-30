@@ -24,16 +24,33 @@ public abstract class Case {
     public Valeurs getVal() {
         return val;
     }
-
+    /*
+    public void setVal(Valeurs val) {
+        boolean ChangeVal=true;
+        for (int i = 0; i < 3; i++) {
+            if(tabGroupe.get(i).estEnConflit(val)){
+                ChangeVal=false;
+            }
+        }
+        
+        if(ChangeVal)
+            this.val=val;
+    }
+    */
     public ArrayList<Groupe> getTabGroupe() {
         return tabGroupe;
     }
 
     public void setTabGroupe(ArrayList<Groupe> tabGroupe) {
-        this.tabGroupe = tabGroupe;
+        this.tabGroupe= new ArrayList<>();
+        for (int i = 0; i < tabGroupe.size(); i++) {
+            this.tabGroupe.add(tabGroupe.get(i));
+        }
     }
     
-
+    public abstract void update(Valeurs val);
+        
+    
     
 
 }

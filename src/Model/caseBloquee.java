@@ -17,5 +17,8 @@ public class caseBloquee extends Case {
         super(val);
     }
  
-    
+    @Override
+    public void update(Valeurs val) {
+        
+    }
 }

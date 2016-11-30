@@ -37,13 +37,18 @@ public class caseNonBloquee extends Case{
         this.val=val;
     }
     
+    @Override
     public void update(Valeurs val) {
-        this.val = val;
+        
         conflit = false;
         for (Groupe g : tabGroupe ) {
-            if (g.estEnConflit(this)) {
+            System.out.println("");
+            System.out.println("Groupe : ");
+            if (g.estEnConflit(val)) {
                 conflit = true;
             }
         }
+        if(!conflit)
+            this.val = val;
     }
 }
