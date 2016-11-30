@@ -15,11 +15,11 @@ public class Groupe {
     private ArrayList<Case> tab;
 
     public Groupe() {
-        /*
+        
         tab = new ArrayList<Case>();
-        for(int i=0; i<9; i++)
-            tab.add(new caseNonBloquee(Valeurs.ZERO));
-        */
+        //for(int i=0; i<9; i++)
+        //    tab.add(new caseNonBloquee(Valeurs.ZERO));
+        
     }
     
     public boolean estEnConflit(Case c){

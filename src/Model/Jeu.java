@@ -22,23 +22,37 @@ public class Jeu {
     }
     
     public void init(String data){
+        Case c;
+        int numL,numC;
         
+        tabL = new ArrayList();
+        tabC = new ArrayList();
+        tabCa = new ArrayList();
         
         for(int i=0; i<9; i++){
-            tabL.set(i, new Groupe());
-            tabC.set(i, new Groupe());
+            tabL.add(i, new Groupe());
+            tabC.add(i, new Groupe());
+            
+        }
+        for (int i = 0; i < 3; i++) {
+            tabCa.add(i, new ArrayList());
+            for (int j = 0; j < 3; j++) {
+                tabCa.get(i).add(j,new Groupe());
+            }
         }
         
         String[]tabData = data.split(" ");
         
-        int numL,numC;
-        
 	for(int i = 0; i<tabData.length; i++){
             
             // VOIR POUR LA CLASSE CASE
-            caseBloquee c = new caseBloquee(tabData[i]);
+            if(tabData[i].equals("0"))
+                c = new caseNonBloquee(Valeurs.ZERO);
+            else
+                c = new caseBloquee((Valeurs.fromString(tabData[i])));
             numL = i/9;
             numC = i%9;
+            
             tabL.get(numL).add(c);
             tabC.get(numC).add(c);
             tabCa.get(numL/3).get(numC/3).add(c);
