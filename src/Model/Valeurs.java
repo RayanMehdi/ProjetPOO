@@ -17,6 +17,12 @@ public enum Valeurs {
     Valeurs(int v) {
         this.v = v;
     }
+
+    public int getV() {
+        return v;
+    }
+    
+    
     public static Valeurs fromString(String s){
         if(s!=null){
             for (Valeurs v : Valeurs.values()) {
@@ -26,5 +32,6 @@ public enum Valeurs {
         }
         return null;
     }
+    
 
 }
