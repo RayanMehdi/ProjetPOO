@@ -17,5 +17,14 @@ public enum Valeurs {
     Valeurs(int v) {
         this.v = v;
     }
+    public static Valeurs fromString(String s){
+        if(s!=null){
+            for (Valeurs v : Valeurs.values()) {
+                if(Integer.valueOf(s) == v.v)
+                    return v;
+            }
+        }
+        return null;
+    }
 
 }
