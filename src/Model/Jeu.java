@@ -83,4 +83,25 @@ public class Jeu {
     public Case getCase(int i, int j){
         return tabL.get(i).getCase(j);
     }
+    public boolean fin(){
+        boolean fin = true;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Case c = tabL.get(i).getCase(j);     
+                if(c.val==Valeurs.ZERO){
+                    fin = false;
+                    break;
+                }
+                for (Groupe g : c.tabGroupe ) {
+                    System.out.println("");
+                    System.out.println("Groupe : ");
+                    if (g.estEnConflit(c.val)) {
+                        fin = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return fin;
+    }
 }
