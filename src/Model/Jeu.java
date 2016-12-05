@@ -28,7 +28,6 @@ public class Jeu {
         tabL = new ArrayList();
         tabC = new ArrayList();
         tabCa = new ArrayList();
-        
         for(int i=0; i<9; i++){
             tabL.add(i, new Groupe());
             tabC.add(i, new Groupe());
@@ -45,7 +44,7 @@ public class Jeu {
         
 	for(int i = 0; i<tabData.length; i++){
             
-            // VOIR POUR LA CLASSE CASE
+            
             if(tabData[i].equals("0"))
                 c = new caseNonBloquee(Valeurs.ZERO);
             else
@@ -53,9 +52,18 @@ public class Jeu {
             numL = i/9;
             numC = i%9;
             
+            // Ajout des cases dans les groupes (dans les tableau de groupe linge, colonne et carré)
             tabL.get(numL).add(c);
             tabC.get(numC).add(c);
             tabCa.get(numL/3).get(numC/3).add(c);
+            
+
+            // Ajout des groupes dans le tableau de groupe d'une case.
+            ArrayList<Groupe> tabGroupe = new ArrayList();
+            tabGroupe.add(tabL.get(numL));
+            tabGroupe.add(tabC.get(numC));
+            tabGroupe.add(tabCa.get(numL/3).get(numC/3));
+            c.setTabGroupe(tabGroupe);
         }
     }
     
@@ -70,5 +78,30 @@ public class Jeu {
     }
     public String getValeurCase(int i, int j){
         return Integer.toString(tabL.get(i).getCase(j).getVal().getV());
+    }
+    
+    public Case getCase(int i, int j){
+        return tabL.get(i).getCase(j);
+    }
+    public boolean fin(){
+        boolean fin = true;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Case c = tabL.get(i).getCase(j);     
+                if(c.val==Valeurs.ZERO){
+                    fin = false;
+                    break;
+                }
+                for (Groupe g : c.tabGroupe ) {
+                    System.out.println("");
+                    System.out.println("Groupe : ");
+                    if (g.estEnConflit(c.val)) {
+                        fin = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return fin;
     }
 }
