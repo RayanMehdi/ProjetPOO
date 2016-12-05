@@ -14,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import Model.*;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -33,31 +35,40 @@ public class MainView extends Application {
         GridPane gPane = new GridPane();
         int column = 0;
         int row = 0;
-        
+
+        gPane.setGridLinesVisible(true);
+        StackPane s = new StackPane();
+
+        Scene scene = new Scene(gPane, 300, 300);
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                final Text t = new Text("0");
-                t.setWrappingWidth(30);
-                t.setFont(Font.font("Verdana", 20));
-                t.setTextAlignment(TextAlignment.CENTER);
+                
 
-                gPane.add(t, column++, row);
+                
+               /* final Text t = new Text(jeu.getValeurCase(i, j));
+                t.setWrappingWidth(scene.getWidth() / 9);
+               
+                t.setFont(Font.font("Verdana", 20));
+                t.setTextAlignment(TextAlignment.CENTER);*/
+                TextField tf = new TextField(jeu.getValeurCase(i, j));
+                tf.setPrefSize(scene.getWidth()/9, scene.getHeight()/9);
+                
+                gPane.add(tf, column++, row);
+                
 
                 if (column > 8) {
                     column = 0;
                     row++;
                 }
-
+                
             }
-        }
-        gPane.setGridLinesVisible(true);
 
-        Scene scene = new Scene(gPane, 300, 250);
-      
-        primaryStage.setTitle("Sudoku");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+            primaryStage.setTitle("Sudoku");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        }
     }
 
     /**
