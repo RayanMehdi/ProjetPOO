@@ -22,7 +22,9 @@ public class caseNonBloquee extends Case{
     public void setConflit(boolean conflit) {
         this.conflit = conflit;
     }
-    
+    public boolean getConflit(){
+        return this.conflit;
+    }
     
     
     public caseNonBloquee(Valeurs val) {

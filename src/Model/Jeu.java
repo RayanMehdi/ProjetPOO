@@ -5,6 +5,14 @@
  */
 package Model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -72,14 +80,18 @@ public class Jeu {
         }
     }
     
-    public void affiche(){
+    @Override
+    public String toString(){
+        String s="";
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                System.out.print(tabL.get(i).getCase(j).getVal().getV()+" ");
+                if(tabL.get(i).getCase(j) instanceof caseBloquee)
+                    s+="#";
+                s+=tabL.get(i).getCase(j).getVal().getV()+" ";
             }
-            System.out.println("");
+            //System.out.println("");
         }
-        
+        return s;
     }
     public String getValeurCase(int i, int j){
         return Integer.toString(tabL.get(i).getCase(j).getVal().getV());
@@ -108,5 +120,38 @@ public class Jeu {
             }
         }
         return fin;
+    }
+    
+    public void sauvegarder(String nom){
+        try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(nom+".txt")));
+        // normalement si le fichier n'existe pas, il est crée à la racine du projet
+        writer.write(this.toString());
+
+        writer.close();
+        }
+        catch (IOException e)
+        {
+        e.printStackTrace();
+        }
+    }
+    public void charger(String fichier){
+        try{
+            InputStream ips=new FileInputStream(fichier); 
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
+            
+            String partie=br.readLine();
+            /*while ((ligne=br.readLine())!=null){
+            System.out.println(ligne);
+            chaine+=ligne;
+            }*/
+            this.init(partie);
+            
+            br.close(); 
+        }		
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 }
