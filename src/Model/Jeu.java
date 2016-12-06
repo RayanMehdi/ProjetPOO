@@ -48,7 +48,11 @@ public class Jeu {
             if(tabData[i].equals("0"))
                 c = new caseNonBloquee(Valeurs.ZERO);
             else{
-                c = new caseBloquee((Valeurs.fromString(tabData[i])));
+                if(tabData[i].substring(0, 1).equals("#")){
+                    c = new caseBloquee((Valeurs.fromString(tabData[i].substring(1,2))));
+                }else{
+                    c = new caseNonBloquee((Valeurs.fromString(tabData[i])));
+                }
             }
             numL = i/9;
             numC = i%9;
@@ -94,8 +98,8 @@ public class Jeu {
                     break;
                 }
                 for (Groupe g : c.tabGroupe ) {
-                    System.out.println("");
-                    System.out.println("Groupe : ");
+                    //System.out.println("");
+                    //System.out.println("Groupe : ");
                     if (g.estEnConflit(c.val)) {
                         fin = false;
                         break;
