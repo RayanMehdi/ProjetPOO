@@ -47,8 +47,9 @@ public class Jeu {
             
             if(tabData[i].equals("0"))
                 c = new caseNonBloquee(Valeurs.ZERO);
-            else
+            else{
                 c = new caseBloquee((Valeurs.fromString(tabData[i])));
+            }
             numL = i/9;
             numC = i%9;
             
