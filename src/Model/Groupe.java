@@ -30,7 +30,7 @@ public class Groupe {
 		boolean ret = false, present = false;
                 
 		for(Case c2 : tab){
-                    System.out.print(" val :"+c2.getVal());
+                    //System.out.print(" val :"+c2.getVal());
 			if(/*c2 instanceof caseBloquee &&*/ c.val == c2.getVal()){
                             //System.out.println(c2.getVal());
                             if(present)
@@ -50,5 +50,18 @@ public class Groupe {
     public Case getCase(int i) {
         return tab.get(i);
     }
-    
+    public Groupe clone() {   
+        Groupe grp=null;
+        try {
+	    grp = (Groupe) super.clone();
+	    
+            for(int i=0;i<grp.tab.size();i++)
+                grp.tab.add((Case) this.tab.get(i).clone());
+	   
+            } catch(CloneNotSupportedException cnse) {
+                cnse.printStackTrace(System.err);   
+            }
+            
+	    return grp;
+  	}
 }

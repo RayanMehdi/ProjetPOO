@@ -107,7 +107,7 @@ public class MainView extends Application {
         jeu.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                System.out.println(jeu);
+                System.out.println("PB");
                 reload();
                 
                
@@ -131,7 +131,7 @@ public class MainView extends Application {
                             if (!"".equals(newValue)) {
                                 if (Integer.valueOf(newValue) <= 9 && Integer.valueOf(newValue) >= 0) {
                                     jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
-                                    jeu.fin();
+                                    System.out.println(jeu.fin());
                                 }
                             }
 

@@ -21,4 +21,8 @@ public class caseBloquee extends Case {
     public void update(Valeurs val) {
         
     }
+    @Override
+    public boolean getConflit(){
+        return false;
+    }
 }

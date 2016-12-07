@@ -13,19 +13,8 @@ import java.util.ArrayList;
  */
 public class caseNonBloquee extends Case{
     
-    private boolean conflit;
-
-    public boolean isConflit() {
-        return conflit;
-    }
-
-    public void setConflit(boolean conflit) {
-        this.conflit = conflit;
-    }
-    public boolean getConflit(){
-        return this.conflit;
-    }
     
+
     
     public caseNonBloquee(Valeurs val) {
         super(val);
@@ -42,16 +31,14 @@ public class caseNonBloquee extends Case{
     @Override
     public void update(Valeurs val) {
         
-        conflit = false;
+        super.setConflit(false);
         for (Groupe g : tabGroupe ) {
             //System.out.println("");
             //System.out.println("Groupe : ");
             if (g.estEnConflit(this)) {
-                conflit = true;
-            }
+                super.setConflit(true);
         }
-        
         this.val = val;
-        
     }
-}
+    }
+   }
