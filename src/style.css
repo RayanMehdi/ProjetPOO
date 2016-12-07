@@ -1,0 +1,8 @@
+.bloque{
+    -fx-font-weight: bold;
+    -fx-background-color: lightgray;
+}
+
+.conflit{
+    -fx-background-color: red; 
+}
