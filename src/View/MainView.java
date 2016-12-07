@@ -42,76 +42,81 @@ public class MainView extends Application {
     private Jeu jeu;
 
     GridPane gPane;
-    
-  
-    
- 
+    Stage stage;
+    Scene scene;
+    MenuBar menu;
+    Menu fichier;
+    Menu aide;
+    MenuItem save;
+    MenuItem load;
+    MenuItem exit;
 
+    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> childrens = gridPane.getChildren();
+
+        for (Node node : childrens) {
+            if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+
+        return result;
+    }
 
     @Override
-    public void start(Stage primaryStage) {
-        jeu = new Jeu("#5 #3 0 0 #7 0 0 0 0 #6 0 0 #1 #9 #5 0 0 0 0 #9 #8 0 0 0 0 #6 0 #8 0 0 0 #6 0 0 0 #3 #4 0 0 #8 0 #3 0 0 #1 #7 0 0 0 #2 0 0 0 #6 0 #6 0 0 0 0 #2 #8 0 0 0 0 #4 #1 #9 0 0 #5 0 0 0 0 #8 0 0 #7 #9");
+    public void start(Stage stage) throws Exception{
+        this.stage = stage;
+        jeu = new Jeu("0 #6 4 3 #5 #1 9 2 8 8 3 #5 9 6 #2 #7 1 #4 1 2 #9 #8 7 4 5 3 6 4 #1 2 5 9 7 6 8 3 #5 #7 6 1 #3 #8 #2 4 9 3 9 8 #4 2 6 1 5 7 2 #8 3 7 1 9 4 6 #5 6 5 #7 2 #4 3 #8 9 1 9 4 1 #6 8 5 3 7 2");
         
-        MenuBar menu = new MenuBar();
-        Menu fichier = new Menu("Fichier");
-        Menu aide = new Menu("Aide");
-        MenuItem save = new MenuItem("Enregister");
-        MenuItem load = new MenuItem("Charger");
-        MenuItem exit = new MenuItem("Quitter");
+        initGrille();
+        
+        initMenuListeners();
+
+        stage.setTitle("Sudoku");
+        stage.setScene(scene);
+
+        stage.show();
+
+    }
+    
+    public void initGrille(){
+        
+        menu = new MenuBar();
+        fichier = new Menu("Fichier");
+        aide = new Menu("Aide");
+        save = new MenuItem("Enregister");
+        load = new MenuItem("Charger");
+        exit = new MenuItem("Quitter");
         fichier.getItems().addAll(save, load, exit);
         menu.getMenus().addAll(fichier, aide);
-        
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.exit(0);
-            }
-        });
-              
-        save.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                jeu.sauvegarder("test.txt");
-                
-                
-            }
-        });
+
        
-        load.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                jeu.charger("test.txt");
-                System.out.println(jeu);
-            }
-        });
-        final GridPane gPane = new GridPane();
+        gPane = new GridPane();
         int column = 0;
         int row = 0;
-       
+
         gPane.setGridLinesVisible(true);
         BorderPane border = new BorderPane();
         border.setTop(menu);
-        
-        Scene scene = new Scene(border, 300, 300);
+
+        scene = new Scene(border, 300, 300);
         scene.getStylesheets().add("style.css");
-        
+
         jeu.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                
+                System.out.println(jeu);
+                reload();
             }
+          
         });
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-
-                /* final Text t = new Text(jeu.getValeurCase(i, j));
-                t.setWrappingWidth(scene.getWidth() / 9);
-               
-                t.setFont(Font.font("Verdana", 20));
-                t.setTextAlignment(TextAlignment.CENTER);*/
                 final TextField tf = new TextField(jeu.getValeurCase(i, j));
-             
+
                 if (jeu.getCase(i, j) instanceof caseBloquee) {
                     tf.setEditable(false);
                     tf.getStyleClass().add("bloque");
@@ -120,18 +125,23 @@ public class MainView extends Application {
 
                         @Override
                         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                            System.out.println(newValue.length());
+
                             if (!"".equals(newValue)) {
-                                
-                                System.out.println(GridPane.getColumnIndex(tf)+ " " +GridPane.getRowIndex(tf));
-                              jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
-                                System.out.println(jeu);
+                                if (Integer.valueOf(newValue) <= 9 && Integer.valueOf(newValue) >= 0) {
+                                    jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
+                                    jeu.fin();
+                                }
                             }
 
                         }
 
                     }
                     );
+                    caseNonBloquee c =(caseNonBloquee) jeu.getCase(i, j);
+                    if(c.isConflit())
+                        tf.getStyleClass().add("conflit");
+                    else
+                        tf.getStyleClass().add("nonBloque");
                 }
 
                 tf.setPrefSize(scene.getWidth() / 9, scene.getHeight() / 9);
@@ -147,15 +157,44 @@ public class MainView extends Application {
 
         }
         border.setCenter(gPane);
+        
+    }
+    
+    public void initMenuListeners(){
+         exit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.exit(0);
+            }
+        });
 
-        primaryStage.setTitle(
-                "Sudoku");
-        primaryStage.setScene(scene);
+        save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                jeu.sauvegarder("test");
 
-        primaryStage.show();
+            }
+        });
 
+        load.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                jeu.charger("test.txt");
+                System.out.println(jeu);
+            }
+        });
+        
     }
 
+    public void reload(){
+        
+        initGrille();
+        initMenuListeners();
+         stage.setTitle("Sudoku");
+        stage.setScene(scene);
+
+        stage.show();
+    }
     /**
      * @param args the command line arguments
      */
