@@ -46,7 +46,7 @@ public class caseNonBloquee extends Case{
         for (Groupe g : tabGroupe ) {
             //System.out.println("");
             //System.out.println("Groupe : ");
-            if (g.estEnConflit(val)) {
+            if (g.estEnConflit(this)) {
                 conflit = true;
             }
         }

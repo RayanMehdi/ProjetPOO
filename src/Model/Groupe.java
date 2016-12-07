@@ -22,11 +22,11 @@ public class Groupe {
         
     }
     
-    public boolean estEnConflit(Valeurs v){
+    public boolean estEnConflit(Case c){
 		boolean ret = false;
 		for(Case c2 : tab){
-                    //System.out.print(" val :"+c2.getVal());
-			if(c2 instanceof caseBloquee && v == c2.getVal()){
+                    System.out.print(" val :"+c2.getVal());
+			if(/*c2 instanceof caseBloquee &&*/ c.val == c2.getVal()){
                             //System.out.println(c2.getVal());
                             ret = true;
                         }
