@@ -118,7 +118,7 @@ public class MainView extends Application {
                             if (!"".equals(newValue)) {
                                 
                                 System.out.println(GridPane.getColumnIndex(tf)+ " " +GridPane.getRowIndex(tf));
-                              jeu.getCase(GridPane.getColumnIndex(tf), GridPane.getRowIndex(tf)).update(Valeurs.fromString(newValue));
+                              jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
                                 System.out.println(jeu);
                             }
 
