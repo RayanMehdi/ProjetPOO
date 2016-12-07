@@ -21,18 +21,28 @@ public class Groupe {
         //    tab.add(new caseNonBloquee(Valeurs.ZERO));
         
     }
+
+    public ArrayList<Case> getTab() {
+        return tab;
+    }
     
-    public boolean estEnConflit(Valeurs v){
-		boolean ret = false;
+    public boolean estEnConflit(Case c){
+		boolean ret = false, present = false;
+                
 		for(Case c2 : tab){
-                    //System.out.print(" val :"+c2.getVal());
-			if(c2 instanceof caseBloquee && v == c2.getVal()){
+                    System.out.print(" val :"+c2.getVal());
+			if(/*c2 instanceof caseBloquee &&*/ c.val == c2.getVal()){
                             //System.out.println(c2.getVal());
-                            ret = true;
+                            if(present)
+                                ret = true;
+                            present=true;
+                            
                         }
 		}
 		return ret;
-	}
+    }
+    
+    
     public void add(Case c){
         this.tab.add(c);
     }
