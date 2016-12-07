@@ -105,34 +105,21 @@ public class Jeu extends Observable{
         boolean fin = true;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                Case c = tabL.get(i).getCase(j);     
+                Case c = tabL.get(i).getCase(j);    
+                c.setConflit(false);
                 if(c.val==Valeurs.ZERO){
-                    //System.out.println("C'est ZERO ICI");
                     fin = false;
-                    break;
                 }
                 
-                //System.out.println("TEST pour "+i+" "+j);
                 for (Groupe g : c.tabGroupe ){
                     for(int k=0; k<g.getTab().size();k++){
-                        //System.out.println("");
-                        //System.out.println("Groupe : ");
                         if (g.estEnConflit(g.getCase(k))) {
-                            //System.out.println("");
-                            //System.out.println("Valeur en conflit "+g.getCase(k).val);
                             fin = false;
-                            break;
                         }
+                        
                     }
                 }
-                
-                
-                
-                if(!fin)
-                    break;
             }
-            if(!fin)
-                    break;
         }
         setChanged();
         notifyObservers();

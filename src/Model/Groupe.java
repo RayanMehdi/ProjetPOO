@@ -27,16 +27,19 @@ public class Groupe {
     }
     
     public boolean estEnConflit(Case c){
-		boolean ret = false, present = false;
+		boolean ret = false/*, present = false*/;
                 
 		for(Case c2 : tab){
-                    //System.out.print(" val :"+c2.getVal());
-			if(/*c2 instanceof caseBloquee &&*/ c.val == c2.getVal()){
-                            //System.out.println(c2.getVal());
-                            if(present)
+                        
+			if(c.val == c2.getVal() && c!=c2){
+                          
+                            //if(present){
                                 ret = true;
-                            present=true;
-                            
+                            //}
+                             
+                            //present=true;
+                            c.setConflit(true);   
+                            c2.setConflit(true);
                         }
 		}
 		return ret;

@@ -129,10 +129,14 @@ public class MainView extends Application {
 
                             if (!"".equals(newValue)) {
                                 if (Integer.valueOf(newValue) <= 9 && Integer.valueOf(newValue) >= 0) {
-                                    System.out.println("Début");
+                                    //System.out.println("Début");
                                     jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
-                                    System.out.println("FIN");
-                                    System.out.println(jeu.fin());
+                                    //System.out.println("FIN");
+                                    
+                                    // FIN
+                                    
+                                    if(jeu.fin())
+                                        System.exit(0);
                                 }
                             }
 
