@@ -69,7 +69,15 @@ public class MainView extends Application {
     public void start(Stage stage) throws Exception{
         this.stage = stage;
         jeu = new Jeu("0 #6 4 3 #5 #1 9 2 8 8 3 #5 9 6 #2 #7 1 #4 1 2 #9 #8 7 4 5 3 6 4 #1 2 5 9 7 6 8 3 #5 #7 6 1 #3 #8 #2 4 9 3 9 8 #4 2 6 1 5 7 2 #8 3 7 1 9 4 6 #5 6 5 #7 2 #4 3 #8 9 1 9 4 1 #6 8 5 3 7 2");
-        
+        jeu.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                System.out.println("PB");
+                reload();
+                
+            }
+          
+        });
         initGrille();
         
         initMenuListeners();
@@ -104,16 +112,7 @@ public class MainView extends Application {
         scene = new Scene(border, 300, 300);
         scene.getStylesheets().add("style.css");
 
-        jeu.addObserver(new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                System.out.println("PB");
-                reload();
-                
-               
-            }
-          
-        });
+        
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -130,7 +129,9 @@ public class MainView extends Application {
 
                             if (!"".equals(newValue)) {
                                 if (Integer.valueOf(newValue) <= 9 && Integer.valueOf(newValue) >= 0) {
+                                    System.out.println("Début");
                                     jeu.getCase(GridPane.getRowIndex(tf), GridPane.getColumnIndex(tf)).update(Valeurs.fromString(newValue));
+                                    System.out.println("FIN");
                                     System.out.println(jeu.fin());
                                 }
                             }
