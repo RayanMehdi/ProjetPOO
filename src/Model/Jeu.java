@@ -14,12 +14,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author Jo'
  */
-public class Jeu {
+public class Jeu extends Observable{
     private ArrayList<Groupe> tabL;
     private ArrayList<Groupe> tabC;
     private ArrayList<ArrayList<Groupe>> tabCa;
@@ -119,6 +120,8 @@ public class Jeu {
                 }
             }
         }
+        setChanged();
+        notifyObservers();
         return fin;
     }
     
@@ -147,6 +150,8 @@ public class Jeu {
             chaine+=ligne;
             }*/
             this.init(partie);
+            setChanged();
+            notifyObservers();
             
             br.close(); 
         }		

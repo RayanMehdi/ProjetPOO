@@ -94,7 +94,13 @@ public class MainView extends Application {
         
         Scene scene = new Scene(border, 300, 300);
         scene.getStylesheets().add("style.css");
-        System.out.println(jeu);
+        
+        jeu.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                
+            }
+        });
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
