@@ -109,6 +109,8 @@ public class MainView extends Application {
             public void update(Observable o, Object arg) {
                 System.out.println(jeu);
                 reload();
+                
+               
             }
           
         });
@@ -138,7 +140,7 @@ public class MainView extends Application {
                     }
                     );
                     caseNonBloquee c =(caseNonBloquee) jeu.getCase(i, j);
-                    if(c.isConflit())
+                    if(c.getConflit())
                         tf.getStyleClass().add("conflit");
                     else
                         tf.getStyleClass().add("nonBloque");
