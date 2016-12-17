@@ -109,7 +109,7 @@ public class MainView extends Application {
         BorderPane border = new BorderPane();
         border.setTop(menu);
 
-        scene = new Scene(border, 300, 300);
+        scene = new Scene(border, 330, 330);
         scene.getStylesheets().add("style.css");
 
         for (int i = 0; i < 9; i++) {
